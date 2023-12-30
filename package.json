@@ -1,0 +1,23 @@
+{
+  "name": "cs-roll",
+  "version": "0.0.0",
+  "description": "A discord bot which simulates opening Counter Strike cases. Providing inventory, leveling, quests, gambling, and more!",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "MichaelArita",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.3",
+    "discord.js": "^14.14.1",
+    "mongoose": "^8.0.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.2"
+  }
+}
