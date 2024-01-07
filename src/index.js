@@ -1,8 +1,7 @@
 const { Client, IntentsBitField, Events } = require('discord.js');
-const eventHandler = require('./handlers/eventHandler');
 require('dotenv').config();
 
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const { DISCORD_TOKEN } = process.env;
 
 const client = new Client({
   intents: [
@@ -13,6 +12,8 @@ const client = new Client({
   ],
 });
 
-eventHandler(client);
+client.once(Events.ClientReady, readyClient => {
+  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+});
 
 client.login(DISCORD_TOKEN);
