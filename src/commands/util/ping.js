@@ -5,6 +5,13 @@ module.exports = {
     .setName('ping')
     .setDescription('Replies with Pong!'),
   async execute(interaction) {
-    await interaction.reply('Pong!');
+    await interaction.deferReply();
+
+    const reply = await interaction.fetchReply();
+
+    const ping = reply.createdTimestamp - interaction.createdTimestamp;
+    
+    await interaction.editReply(`Pong!\n\n**Client**: ${ping}ms\n**Websocket**: ${interaction.client.ws.ping}ms`);
+    // await interaction.editReply('Pong!');
   },
 };
