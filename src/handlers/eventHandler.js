@@ -19,7 +19,7 @@ module.exports = (client) => {
 
   const eventsPath = path.join(__dirname, '../events');
   const eventFolders = getAllFiles(eventsPath, true);
-
+  // let folderPropertyFile = null;
   // console.log(eventFolders);
   for (const eventFolder of eventFolders) {
     const eventFiles = getAllFiles(eventFolder);
@@ -27,9 +27,26 @@ module.exports = (client) => {
 
     const hasPropertyFile = eventFiles.includes(path.join(eventFolder, `-1-${path.basename(eventFolder)}-properties.js`));
     if (!hasPropertyFile) continue;
+    // else folderPropertyFile = 
 
     const eventProperties = require(eventFiles.pop());
     console.log(eventProperties);
 
+    if (eventProperties.once) {
+      client.once(eventProperties.name, async (...args) => {
+        for (const eventFile of eventFiles) {
+          const eventFunction = require(eventFile);
+          await eventFunction(client, ...args);
+        }
+      });
+    }
+    else {
+      client.on(eventProperties.name, async (...args) => {
+        for (const eventFile of eventFiles) {
+          const eventFunction = require(eventFile);
+          await eventFunction(client, ...args);
+        }
+      });
+    }
   }
 };
