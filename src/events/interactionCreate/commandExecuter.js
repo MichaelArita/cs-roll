@@ -1,10 +1,10 @@
-const path = require('path');
+const consoleLog = require('../../tests/consoleLog');
 
 module.exports = async (client, interaction) => {
-  console.log('we\'re running our exectutor');
   if (!interaction.isChatInputCommand()) return;
 
   const commands = client.commands;
 
-  console.log('Commands Collection: ', commands);
+  // console.log('Commands Collection: ', commands);
+  consoleLog(__filename, 8, `Commands Collection: ${JSON.stringify(commands, null, '\t')}`);
 };
