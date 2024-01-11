@@ -29,8 +29,8 @@ module.exports = (client) => {
     if (!hasPropertyFile) continue;
     // else folderPropertyFile = 
 
-    const eventProperties = require(eventFiles.pop());
-    console.log(eventProperties);
+    const eventProperties = require(eventFiles.shift());
+    // console.log(eventProperties.name);
 
     if (eventProperties.once) {
       client.once(eventProperties.name, async (...args) => {
