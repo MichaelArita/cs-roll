@@ -1,8 +1,12 @@
-const { Client, IntentsBitField, Events } = require('discord.js');
-const eventHandler = require('./handlers/eventHandler');
+const fs = require('fs');
+const path = require('path');
+const { Client, IntentsBitField, Collection } = require('discord.js');
 require('dotenv').config();
 
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const commandHandler = require('./handlers/commandHandler');
+const eventHandler = require('./handlers/eventHandler');
+
+const { DISCORD_TOKEN } = process.env;
 
 const client = new Client({
   intents: [
@@ -13,6 +17,10 @@ const client = new Client({
   ],
 });
 
+// TODO: Move command handler and filePath reader out into separate utility functions
+client.commands = new Collection();
+
+commandHandler(client);
 eventHandler(client);
 
 client.login(DISCORD_TOKEN);
